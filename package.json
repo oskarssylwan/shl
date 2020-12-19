@@ -1,0 +1,9 @@
+{
+  "name": "shl",
+  "version": "0.0.0",
+  "description": "View SHL data",
+  "main": "index.js",
+  "repository": "github.com/oskarssylwan/shl",
+  "author": "Oskars Sylwan",
+  "license": "MIT"
+}
