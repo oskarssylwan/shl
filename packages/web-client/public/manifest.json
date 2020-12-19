@@ -1,0 +1,9 @@
+{
+  "short_name": "SHL",
+  "name": "View SHL Data",
+  "icons": [],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
