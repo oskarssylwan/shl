@@ -1,0 +1,27 @@
+FROM alpine:latest AS Base
+
+RUN apk --no-cache add nodejs
+
+FROM Base AS NPM
+WORKDIR /home/backend
+COPY package.json .
+COPY yarn.lock .
+COPY tsconfig.json .
+COPY ./src ./src
+RUN apk add npm
+RUN npm install
+RUN npm run build
+
+FROM Base AS PROD
+WORKDIR /home/api
+COPY . .
+COPY --from=NPM /home/api/node_modules ./node_modules/
+COPY --from=NPM /home/api/build ./build/
+RUN apk add sudo
+RUN adduser --disabled-password --gecos '' docker
+RUN adduser docker wheel
+RUN echo '%wheel ALL=(ALL) ALL' > /etc/sudoers.d/wheel
+
+USER docker
+
+CMD ["node", "build/index.js"]
